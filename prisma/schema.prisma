@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id             Int       @default(autoincrement()) @id // Auto-incrementing ID
+  customerId     String?   @unique // Allow optional String customer IDs
+  first_name     String?
+  last_name      String?
+  age            Int?
+  phone_number   BigInt?
+  monthly_income Int?    
+  approved_limit Int?
+  current_debt   Int?
+}
+
+model Loan {
+  id                  Int      @id @default(autoincrement())
+  customer_id         Int?
+  loan_amount         Float
+  interest_rate       Float
+  tenure              Int
+  monthly_repayment   Float
+  emis_paid_on_time   Int
+  start_date          DateTime
+  end_date            DateTime
+}
